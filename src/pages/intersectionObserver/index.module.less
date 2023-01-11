@@ -1,0 +1,53 @@
+.IntersectionObserverPage{
+  width: auto;
+  height: 100%;
+  padding: 10px 12px 10px;
+  
+  // 先定义一个最大的容器为弹性盒子，子元素为横向排布
+  .flexBox {
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; // 使每个弹性盒子保持自身的高度,并位于容器顶部
+    justify-content: space-between;
+    
+    // 横向排布的两个子元素都设置为纵向排布的弹性盒子
+    .flexItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 49%;
+      max-width: 49%;
+    }
+  }
+  
+  .cardBox {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 10px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e4e0f0;
+    border-radius: 5px;
+    -moz-column-break-inside: avoid;
+    break-inside: avoid;
+    img {
+      width: 100%;
+    }
+    p {
+      margin: 0px;
+    }
+  }  
+
+  .loading{
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    margin-left: -20px;
+    font-size: 18px;
+    background: #ffffff;
+  } 
+}
