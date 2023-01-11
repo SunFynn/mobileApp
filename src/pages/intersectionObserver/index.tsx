@@ -1,11 +1,5 @@
-import React, {
-  useEffect,
-  useReducer,
-  useState,
-  useMemo,
-  useLayoutEffect,
-} from "react";
-import { View, Text, ScrollView } from "@tarojs/components";
+import React, { useEffect, useReducer, useState, useMemo, useLayoutEffect } from "react";
+import { ScrollView } from "@tarojs/components";
 import styles from "./index.module.less";
 
 interface WaterFallItem {
@@ -66,7 +60,8 @@ const IntersectionObserverBox = () => {
         data.forEach((item: any, i: number) => {
           const obj: any = {};
           // obj.img = `https://picsum.photos/640/200/?random=${random(1, 1000)}`;
-          obj.img = `${item.img}`;
+          // obj.img = `${item.img}`;
+          obj.img = `https://img2.baidu.com/it/u=1361506290,4036378790&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500`;
           obj.title = `${dataList.length + i + 1}`;
           obj.desction = `${createRandomChinese(random(10, 100))}`;
           arr.push(obj);
@@ -142,7 +137,6 @@ const IntersectionObserverBox = () => {
 
   const handleScroll = () => {
     const allBox: any = document.getElementById("allBox");
-
     // box.scrollHeight  滚动条高度
     // box.clientHeight  视图区域高度
     // box.scrollTop     滚动条距离最上边高度
