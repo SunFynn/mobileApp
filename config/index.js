@@ -1,3 +1,4 @@
+const path = require('path');
 const config = {
   projectName: 'mobileApp',
   date: '2023-1-10',
@@ -9,6 +10,10 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'mobileApp',
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src')
+  },
+  plugins: ['@tarojs/plugin-html'],
   defineConstants: {
   },
   copy: {

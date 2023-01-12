@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer, useState, useMemo, useLayoutEffect } from "react";
 import { ScrollView } from "@tarojs/components";
+import { request } from "@tarojs/taro";
+import { randomString } from "@/utils/createRandomChinese";
 import styles from "./index.module.less";
 
 interface WaterFallItem {
@@ -20,7 +22,6 @@ const IntersectionObserverBox = () => {
   const [dataIndex, setDataIndex] = useState(columnCount);
 
   // 强制重新渲染页面使用
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
@@ -32,38 +33,27 @@ const IntersectionObserverBox = () => {
     return min + Math.floor(Math.random() * (max - min + 1));
   }
 
-  // 随机生成文字
-  const createRandomChinese = (count: number) => {
-    const start = parseInt("4e00", 16);
-    const end = parseInt("9fa5", 16);
-    let name = "";
-    for (let i = 0; i < count; i++) {
-      const cha = Math.floor(Math.random() * (end - start));
-      name += "\\u" + (start + cha).toString(16);
-    }
-    return eval(`'${name}'`);
-  };
-
   // 加载更多
   const handleSearchText = async () => {
-    fetch(
-      "https://mock.mengxuegu.com/mock/63899dbd93a67b5f1066906f/api/pinterest",
-      {
-        method: "POST",
-      }
-    )
-      .then((res) => res.json())
+    request({
+      url: "https://mock.mengxuegu.com/mock/63899dbd93a67b5f1066906f/api/pinterest",
+      method: 'POST',
+      header: {
+        Accept: "application/json",
+        "Content-Type": `multipart/form-data;`
+      },
+    }) 
       .then((res) => {
         setLoading(false);
         const { data } = res;
         const arr: any[] = [];
-        data.forEach((item: any, i: number) => {
+        data.data.forEach((item: any, i: number) => {
           const obj: any = {};
           // obj.img = `https://picsum.photos/640/200/?random=${random(1, 1000)}`;
           // obj.img = `${item.img}`;
           obj.img = `https://img2.baidu.com/it/u=1361506290,4036378790&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500`;
           obj.title = `${dataList.length + i + 1}`;
-          obj.desction = `${createRandomChinese(random(10, 100))}`;
+          obj.desction = `${randomString(random(10, 100))}`;
           arr.push(obj);
         });
         setDataList((prev) => [...prev, ...arr]);
@@ -92,9 +82,10 @@ const IntersectionObserverBox = () => {
   }, [dataList, initialize]);
 
   const startObserve = (index: number) => {
-    const columnArray: any = document.querySelectorAll(".flex-column")[index].querySelectorAll(".flex-column-ele");
+    const columnArray: any = document.getElementsByClassName("flex-column")[index]?.getElementsByClassName("flex-column-ele") || [];
     // 瀑布流布局：取出数据源中最靠前的一个并添加到瀑布流高度最小的那一列，等图片完全加载后重复该循环
     const observerObj: any = new IntersectionObserver((entries) => {
+      console.log(entries, '0000')
       for (const entry of entries) {
         const { target, isIntersecting } = entry;
         if (isIntersecting) {
@@ -121,7 +112,7 @@ const IntersectionObserverBox = () => {
     const index = eleHeight.indexOf(minEle);
     // 然后把下一个data元素添加在上面高度最矮的这一列里
     const curData = allColumnData;
-    curData[index].push(dataList[dataIndex]);
+    curData[index]?.push(dataList[dataIndex]);
     setDataIndex((n) => n + 1);
     setAllColumnData(curData);
     forceUpdate();
@@ -158,6 +149,7 @@ const IntersectionObserverBox = () => {
       <ScrollView
         className={`flex-row ${styles.flexBox}`}
         id='allBox'
+        enable-flex="true"
         scrollY
         scrollWithAnimation
         scrollTop={0}

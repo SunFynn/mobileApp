@@ -1,5 +1,7 @@
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { View, ScrollView } from "@tarojs/components";
+import { request } from "@tarojs/taro";
+import { randomString } from "@/utils/createRandomChinese";
 import styles from "./index.module.less";
 
 function Index() {
@@ -31,11 +33,11 @@ function Index() {
   }
 
   useLayoutEffect(() => {
-    const allBox: any = document.getElementById("allBox");
+    const allBox: any = document.getElementById("allBox") || {};
     const cardBoxDivLis = document.getElementsByClassName("cardBoxDivLi");
     const cardBoxDivs = document.getElementsByClassName("cardBoxDiv");
     // @ts-ignore
-    const imgs: any[] = allBox?.querySelectorAll("img") || [];
+    const imgs: any[] = allBox?.querySelectorAll?.("img") || [];
     loadImagesFunc(Array.from(imgs)).then(() => {
       // 不是真正的数组，不能使用map、forEach等便利方式
       for (let i = 0; i < cardBoxDivs.length; i++) {
@@ -54,36 +56,25 @@ function Index() {
     return min + Math.floor(Math.random() * (max - min + 1));
   }
 
-  // 随机生成文字
-  const createRandomChinese = (count: number) => {
-    const start = parseInt("4e00", 16);
-    const end = parseInt("9fa5", 16);
-    let name = "";
-    for (let i = 0; i < count; i++) {
-      const cha = Math.floor(Math.random() * (end - start));
-      name += "\\u" + (start + cha).toString(16);
-    }
-    return eval(`'${name}'`);
-  };
-
   const handleSearchText = async () => {
-    fetch(
-      "https://mock.mengxuegu.com/mock/63899dbd93a67b5f1066906f/api/pinterest",
-      {
-        method: "POST",
-      }
-    )
-      .then((res) => res.json())
+    request({
+      url: "https://mock.mengxuegu.com/mock/63899dbd93a67b5f1066906f/api/pinterest",
+      method: 'POST',
+      header: {
+        Accept: "application/json",
+        "Content-Type": `multipart/form-data;`
+      },
+    })
       .then((res) => {
         const { data } = res;
         setLoading(false);
         const arr: any[] = [];
-        data.forEach((item: any, i: number) => {
+        data.data.forEach((item: any, i: number) => {
           const obj: any = {};
           // obj.img = `https://picsum.photos/640/200/?random=${random(1, 1000)}`;
           obj.img = `${item.img}`;
           obj.title = `${list.length + i + 1}`;
-          obj.desction = `${createRandomChinese(random(10, 100))}`;
+          obj.desction = `${randomString(random(10, 100))}`;
           arr.push(obj);
         });
         setList((prev) => [...prev, ...arr]);
@@ -92,7 +83,6 @@ function Index() {
 
   const handleScroll = () => {
     const allBox: any = document.getElementById("allBox");
-
     // box.scrollHeight  滚动条高度
     // box.clientHeight  视图区域高度
     // box.scrollTop     滚动条距离最上边高度

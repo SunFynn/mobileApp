@@ -20,7 +20,11 @@
     "resolveJsonModule": true,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    // 在compilerOptions中添加配置项paths
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["./src", "./types"],
   "compileOnSave": false

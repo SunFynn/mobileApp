@@ -1552,6 +1552,16 @@
     acorn "^8.0.4"
     acorn-walk "^8.0.0"
 
+"@tarojs/plugin-html@^3.5.11":
+  version "3.5.11"
+  resolved "https://registry.npmjs.org/@tarojs/plugin-html/-/plugin-html-3.5.11.tgz#d22d10201afc1d58ff02ace98592b1a48b544512"
+  integrity sha512-KKI1m7GlvDlbYlqMvWG/m4W3ROsYcpFJfcZAaESjRj086TvLXrvx0n+JOTYiGNBp+UMIP+JObCEPvR+NSb6tdw==
+  dependencies:
+    "@babel/parser" "^7.14.5"
+    "@tarojs/runtime" "3.5.11"
+    "@tarojs/service" "3.5.11"
+    "@tarojs/shared" "3.5.11"
+
 "@tarojs/plugin-platform-alipay@3.5.11":
   version "3.5.11"
   resolved "https://registry.npmjs.org/@tarojs/plugin-platform-alipay/-/plugin-platform-alipay-3.5.11.tgz#3aee5e5659fb3a8fe2e83b115a1bcb5045a7bc44"
