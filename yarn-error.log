@@ -64,7 +64,6 @@ npm manifest:
       "@tarojs/plugin-platform-swan": "3.5.11",
       "@tarojs/plugin-platform-tt": "3.5.11",
       "@tarojs/plugin-platform-weapp": "3.5.11",
-      "@tarojs/plugin-sass": "^2.2.10",
       "@tarojs/react": "3.5.11",
       "@tarojs/router": "3.5.11",
       "@tarojs/runtime": "3.5.11",

@@ -9,9 +9,6 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'mobileApp',
-  plugins: [
-    // '@tarojs/plugin-sass'
-  ],
   defineConstants: {
   },
   copy: {
