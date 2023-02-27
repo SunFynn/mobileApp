@@ -1,7 +1,7 @@
 export default defineAppConfig({
   pages: [
+    'pages/intersectionObserver/index',
     'pages/index/index',
-    'pages/intersectionObserver/index'
   ],
   window: {
     backgroundTextStyle: 'light',

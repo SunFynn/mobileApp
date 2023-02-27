@@ -3,7 +3,6 @@ import { ScrollView } from "@tarojs/components";
 import { request } from "@tarojs/taro";
 import { randomString } from "@/utils/createRandomChinese";
 import styles from "./index.module.less";
-
 interface WaterFallItem {
   img: string;
   title: string;
@@ -85,7 +84,6 @@ const IntersectionObserverBox = () => {
     const columnArray: any = document.getElementsByClassName("flex-column")[index]?.getElementsByClassName("flex-column-ele") || [];
     // 瀑布流布局：取出数据源中最靠前的一个并添加到瀑布流高度最小的那一列，等图片完全加载后重复该循环
     const observerObj: any = new IntersectionObserver((entries) => {
-      console.log(entries, '0000')
       for (const entry of entries) {
         const { target, isIntersecting } = entry;
         if (isIntersecting) {
@@ -126,6 +124,7 @@ const IntersectionObserverBox = () => {
     }
   }, [hasGet, initialize]);
 
+  // 下拉加载更多
   const handleScroll = () => {
     const allBox: any = document.getElementById("allBox");
     // box.scrollHeight  滚动条高度

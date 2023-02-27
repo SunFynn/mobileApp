@@ -8,7 +8,7 @@ class App extends Component<PropsWithChildren, any> {
   constructor(props){
     super(props);
     this.state={
-      current: 0,
+      current: 2,
       navList: [
         {title: "grid", url: "pages/index/index"}, 
         {title: '照相'},
