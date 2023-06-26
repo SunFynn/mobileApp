@@ -4,6 +4,9 @@ import { request } from "@tarojs/taro";
 import { randomString } from "@/utils/createRandomChinese";
 import styles from "./index.module.less";
 
+/**
+ * 交叉瀑布流 grid
+*/
 function Index() {
   const [list, setList] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

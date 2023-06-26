@@ -8,7 +8,9 @@ interface WaterFallItem {
   title: string;
   desction: string;
 }
-
+/**
+ * 交叉瀑布流 IntersectionObserver
+*/
 const IntersectionObserverBox = () => {
   const columnCount = useMemo(() => 2, []); // 列数
   const [loading, setLoading] = useState<boolean>(false);

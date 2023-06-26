@@ -59,7 +59,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
-    "@tarojs/cli": "3.5.11",
+    "@tarojs/cli": "^3.5.11",
     "@tarojs/plugin-html": "^3.5.11",
     "@tarojs/webpack5-runner": "3.5.11",
     "@types/react": "^18.0.0",
@@ -75,6 +75,6 @@
     "react-refresh": "^0.11.0",
     "stylelint": "^14.4.0",
     "typescript": "^4.1.0",
-    "webpack": "5.69.0"
+    "webpack": "^5.69.0"
   }
 }
